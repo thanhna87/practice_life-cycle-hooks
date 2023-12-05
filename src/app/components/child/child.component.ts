@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -8,11 +8,14 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   styleUrl: './child.component.css'
 })
 export class ChildComponent implements OnChanges {
+//Add '${implements OnChanges}' to the class.
+
   @Input() userName='';
+  @Output() messageEvent = new EventEmitter();
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    console.log('ngOnChanges triggered', changes)
+     console.log('ngOnChanges triggered', changes)
     if (!changes['userName'].isFirstChange()){
       if (changes['userName'].currentValue === "Chris") {
          this.userName = 'Hello ' + this.userName
@@ -22,4 +25,9 @@ export class ChildComponent implements OnChanges {
    }
 
   }
+
+  SentMessage() {
+    this.messageEvent.emit('Message from child');
+    }
+
 }

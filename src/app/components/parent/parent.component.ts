@@ -13,10 +13,14 @@ function logger(msg:any)
   styleUrl: './parent.component.css'
 })
 export class ParentComponent {
+
   userName = 'Maria';
 
   updateUser() {
     this.userName = 'Chris';
  }
 
+ receiveMessage(message:string) {
+  console.log(message)
+  }
 }
